@@ -1,0 +1,14 @@
+.textarea {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 10px 20px 30px rgb(226, 230, 240);
+  color: #1d2134;
+}
+
+.description {
+  font-size: 14px;
+  margin: 5px 0 10px 0;
+  opacity: 0.45;
+}

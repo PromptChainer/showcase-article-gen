@@ -1,11 +1,35 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import Textarea from "@/components/textarea";
+import { useState } from "react";
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [subject, setSubject] = useState("");
+  const [targetAudience, setTargetAudience] = useState("");
+  const [keywords, setKeywords] = useState("");
+
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const subjectChange = (e) => {
+    setSubject(e.target.value);
+  };
+
+  const targetAudienceChange = (e) => {
+    setTargetAudience(e.target.value);
+  };
+
+  const keywordsChange = (e) => {
+    setKeywords(e.target.value);
+  };
+
+  const generate = () => {
+    console.log("hello");
+  };
+
   return (
     <>
       <Head>
@@ -15,100 +39,99 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
+        <div className={styles.left}>
+          <Textarea
+            placeholder="Add subject"
+            value={subject}
+            onChange={subjectChange}
+            label="Subject"
+            description="Add subject up to 100 characters"
           />
+          <Textarea
+            placeholder="Add target audience"
+            value={targetAudience}
+            onChange={targetAudienceChange}
+            label="Target audence"
+            description="Explaining target audence field"
+          />
+          <Textarea
+            placeholder="Add keywords"
+            value={keywords}
+            onChange={keywordsChange}
+            rows={3}
+            label="Keywords"
+            description="Explaining keywords field"
+          />
+          <div className={styles.keywords}>
+            {keywords &&
+              keywords.split(",").map((keyword) => {
+                return <p className={styles.keyword}>{keyword}</p>;
+              })}
+          </div>
+          <button className={styles.button}>Generate</button>
         </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+        <div className={styles.right}>
+          <div className={styles.title}>
+            "Ipsum" redirects here. For the car, see Toyota Ipsum.
+          </div>
+          <div className={styles.content}>
+            32 Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas
+            sit, aspernatur aut odit aut fugit, sed quia consequuntur magni
+            dolores eos, qui ratione voluptatem sequi nesciunt, neque porro
+            quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur
+            adipisci[ng] velit, sed quia non numquam [do] eius modi tempora
+            inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+            Ut enim ad minima veniam, quis nostrum[d] exercitationem ullam
+            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+            consequatur? [D]Quis autem vel eum i[r]ure reprehenderit, qui in ea
+            voluptate velit esse, quam nihil molestiae consequatur, vel illum,
+            qui dolorem eum fugiat, quo voluptas nulla pariatur? [33] At vero
+            eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis
+            praesentium voluptatum deleniti atque corrupti, quos dolores et quas
+            molestias excepturi sint, obcaecati cupiditate non provident,
+            similique sunt in culpa, qui officia deserunt mollitia animi, id est
+            laborum et dolorum fuga. Et harum quidem rerum facilis est et
+            expedita distinctio. Nam libero tempore, cum soluta nobis est
+            eligendi optio, cumque nihil impedit, quo minus id, quod maxime
+            placeat, facere possimus, omnis voluptas assumenda est, omnis dolor
+            repellendus. Temporibus autem quibusdam et aut officiis debitis aut
+            rerum necessitatibus saepe eveniet, ut et voluptates repudiandae
+            sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
+            sapiente delectus, ut aut reiciendis voluptatibus maiores alias
+            consequatur aut perferendis doloribus asperiores repellat. 32] Sed
+            ut perspiciatis, unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas
+            sit, aspernatur aut odit aut fugit, sed quia consequuntur magni
+            dolores eos, qui ratione voluptatem sequi nesciunt, neque porro
+            quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur
+            adipisci[ng] velit, sed quia non numquam [do] eius modi tempora
+            inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+            Ut enim ad minima veniam, quis nostrum[d] exercitationem ullam
+            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+            consequatur? [D]Quis autem vel eum i[r]ure reprehenderit, qui in ea
+            voluptate velit esse, quam nihil molestiae consequatur, vel illum,
+            qui dolorem eum fugiat, quo voluptas nulla pariatur? [33] At vero
+            eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis
+            praesentium voluptatum deleniti atque corrupti, quos dolores et quas
+            molestias excepturi sint, obcaecati cupiditate non provident,
+            similique sunt in culpa, qui officia deserunt mollitia animi, id est
+            laborum et dolorum fuga. Et harum quidem rerum facilis est et
+            expedita distinctio. Nam libero tempore, cum soluta nobis est
+            eligendi optio, cumque nihil impedit, quo minus id, quod maxime
+            placeat, facere possimus, omnis voluptas assumenda est, omnis dolor
+            repellendus. Temporibus autem quibusdam et aut officiis debitis aut
+            rerum necessitatibus saepe eveniet, ut et voluptates repudiandae
+            sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
+            sapiente delectus, ut aut reiciendis voluptatibus maiores alias
+            consequatur aut perferendis doloribus asperiores repellat.
+          </div>
         </div>
       </main>
     </>
-  )
+  );
 }
