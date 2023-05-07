@@ -16,6 +16,7 @@
 
 .left textarea {
   width: 100%;
+  background-color: white;
 }
 
 .button {
@@ -72,3 +73,8 @@
     grid-template-columns: 1fr;
   }
 }
+
+.textarea-label {
+  color: rgb(var(--foreground-rgb));
+}
+
