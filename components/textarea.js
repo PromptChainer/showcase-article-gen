@@ -11,7 +11,7 @@ function Textarea({
 }) {
   return (
     <div>
-      <label className={styles.label}>{label}</label>
+      <label className={styles.label} style={{ color: '#333' }}>{label}</label>
       <p className={styles.description}>{description}</p>
       <textarea
         className={styles.textarea}

@@ -51,8 +51,8 @@ export default function Home() {
             placeholder="Add target audience"
             value={targetAudience}
             onChange={targetAudienceChange}
-            label="Target audence"
-            description="Explaining target audence field"
+            label="Target audience"
+            description="Explaining target audience field"
           />
           <Textarea
             placeholder="Add keywords"
@@ -65,14 +65,18 @@ export default function Home() {
           <div className={styles.keywords}>
             {keywords &&
               keywords.split(",").map((keyword) => {
-                return <p className={styles.keyword}>{keyword}</p>;
+                return (
+                  <p key={keyword.trim()} className={styles.keyword}>
+                    {keyword}
+                  </p>
+                );
               })}
           </div>
           <button className={styles.button}>Generate</button>
         </div>
         <div className={styles.right}>
           <div className={styles.title}>
-            "Ipsum" redirects here. For the car, see Toyota Ipsum.
+            Bla bla bla redirects here. For the car, see Toyota Ipsum.
           </div>
           <div className={styles.content}>
             32 Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
