@@ -10,9 +10,40 @@ export default function Home() {
   const [subject, setSubject] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
   const [keywords, setKeywords] = useState("");
+  const [personalNotes, setPersonalNotes] = useState("");
+  const [apiResponse, setApiResponse] = useState("");
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const sendInputsToAPI = async () => {
+    try {
+      const response = await fetch(
+        "https://prod.api.promptchainer.io/api/flows/run/clhgojgv60001u70hdt80bx0d",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            variables: {
+              subject,
+              keywords,
+              targetAudience,
+              personalNotes,
+            },
+            apiKey: "4b67a848-ab83-48b4-b8f3-de6ba41d92e9",
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setApiResponse(data[0].output);
+      } else {
+        throw new Error("Something went wrong with the API call");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   const subjectChange = (e) => {
     setSubject(e.target.value);
@@ -26,8 +57,8 @@ export default function Home() {
     setKeywords(e.target.value);
   };
 
-  const generate = () => {
-    console.log("hello");
+  const personalNotesChange = (e) => {
+    setPersonalNotes(e.target.value);
   };
 
   return (
@@ -41,27 +72,35 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.left}>
           <Textarea
-            placeholder="Add subject"
+            placeholder="Start typing, fear not!"
             value={subject}
             onChange={subjectChange}
             label="Subject"
-            description="Add subject up to 100 characters"
+            description="What would you like the article to be about? It can be more than one word."
           />
           <Textarea
-            placeholder="Add target audience"
-            value={targetAudience}
-            onChange={targetAudienceChange}
-            label="Target audience"
-            description="Explaining target audience field"
-          />
-          <Textarea
-            placeholder="Add keywords"
+            placeholder="Start typing, fear not!"
             value={keywords}
             onChange={keywordsChange}
             rows={3}
             label="Keywords"
-            description="Explaining keywords field"
+            description="What would you like the content to include? It can be anything!"
           />
+          <Textarea
+            placeholder="Start typing, fear not!"
+            value={targetAudience}
+            onChange={targetAudienceChange}
+            label="Target Audience"
+            description="Who's your target audience? For example: purple looking people, breaking up bfs, etc."
+          />          
+          <Textarea
+            placeholder="Start typing, fear not!"
+            value={personalNotes}
+            onChange={personalNotesChange}
+            label="Personal Notes"
+            description="Any personal notes or additional instructions."
+          />
+
           <div className={styles.keywords}>
             {keywords &&
               keywords.split(",").map((keyword) => {
@@ -72,68 +111,16 @@ export default function Home() {
                 );
               })}
           </div>
-          <button className={styles.button}>Generate</button>
+          <button className={styles.button} onClick={sendInputsToAPI}>
+            Generate
+          </button>
         </div>
         <div className={styles.right}>
           <div className={styles.title}>
-            Bla bla bla redirects here. For the car, see Toyota Ipsum.
+            Bla bla bla is the meaning of life. What is the point of falling in
+            love?
           </div>
-          <div className={styles.content}>
-            32 Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas
-            sit, aspernatur aut odit aut fugit, sed quia consequuntur magni
-            dolores eos, qui ratione voluptatem sequi nesciunt, neque porro
-            quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur
-            adipisci[ng] velit, sed quia non numquam [do] eius modi tempora
-            inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem.
-            Ut enim ad minima veniam, quis nostrum[d] exercitationem ullam
-            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-            consequatur? [D]Quis autem vel eum i[r]ure reprehenderit, qui in ea
-            voluptate velit esse, quam nihil molestiae consequatur, vel illum,
-            qui dolorem eum fugiat, quo voluptas nulla pariatur? [33] At vero
-            eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis
-            praesentium voluptatum deleniti atque corrupti, quos dolores et quas
-            molestias excepturi sint, obcaecati cupiditate non provident,
-            similique sunt in culpa, qui officia deserunt mollitia animi, id est
-            laborum et dolorum fuga. Et harum quidem rerum facilis est et
-            expedita distinctio. Nam libero tempore, cum soluta nobis est
-            eligendi optio, cumque nihil impedit, quo minus id, quod maxime
-            placeat, facere possimus, omnis voluptas assumenda est, omnis dolor
-            repellendus. Temporibus autem quibusdam et aut officiis debitis aut
-            rerum necessitatibus saepe eveniet, ut et voluptates repudiandae
-            sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
-            sapiente delectus, ut aut reiciendis voluptatibus maiores alias
-            consequatur aut perferendis doloribus asperiores repellat. 32] Sed
-            ut perspiciatis, unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam eaque ipsa,
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas
-            sit, aspernatur aut odit aut fugit, sed quia consequuntur magni
-            dolores eos, qui ratione voluptatem sequi nesciunt, neque porro
-            quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur
-            adipisci[ng] velit, sed quia non numquam [do] eius modi tempora
-            inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem.
-            Ut enim ad minima veniam, quis nostrum[d] exercitationem ullam
-            corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-            consequatur? [D]Quis autem vel eum i[r]ure reprehenderit, qui in ea
-            voluptate velit esse, quam nihil molestiae consequatur, vel illum,
-            qui dolorem eum fugiat, quo voluptas nulla pariatur? [33] At vero
-            eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis
-            praesentium voluptatum deleniti atque corrupti, quos dolores et quas
-            molestias excepturi sint, obcaecati cupiditate non provident,
-            similique sunt in culpa, qui officia deserunt mollitia animi, id est
-            laborum et dolorum fuga. Et harum quidem rerum facilis est et
-            expedita distinctio. Nam libero tempore, cum soluta nobis est
-            eligendi optio, cumque nihil impedit, quo minus id, quod maxime
-            placeat, facere possimus, omnis voluptas assumenda est, omnis dolor
-            repellendus. Temporibus autem quibusdam et aut officiis debitis aut
-            rerum necessitatibus saepe eveniet, ut et voluptates repudiandae
-            sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
-            sapiente delectus, ut aut reiciendis voluptatibus maiores alias
-            consequatur aut perferendis doloribus asperiores repellat.
-          </div>
+          <div className={styles.content}>{apiResponse}</div>
         </div>
       </main>
     </>
