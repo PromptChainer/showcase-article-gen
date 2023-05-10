@@ -82,26 +82,10 @@ export default function Home() {
             placeholder="Start typing, fear not!"
             value={keywords}
             onChange={keywordsChange}
-            rows={3}
             label="Keywords"
             description="What would you like the content to include? It can be anything!"
           />
-          <Textarea
-            placeholder="Start typing, fear not!"
-            value={targetAudience}
-            onChange={targetAudienceChange}
-            label="Target Audience"
-            description="Who's your target audience? For example: purple looking people, breaking up bfs, etc."
-          />          
-          <Textarea
-            placeholder="Start typing, fear not!"
-            value={personalNotes}
-            onChange={personalNotesChange}
-            label="Personal Notes"
-            description="Any personal notes or additional instructions."
-          />
-
-          <div className={styles.keywords}>
+          {/* <div className={styles.keywords}>
             {keywords &&
               keywords.split(",").map((keyword) => {
                 return (
@@ -110,12 +94,32 @@ export default function Home() {
                   </p>
                 );
               })}
-          </div>
+          </div> */}
+          <Textarea
+            placeholder="Start typing, fear not!"
+            value={targetAudience}
+            onChange={targetAudienceChange}
+            label="Target Audience"
+            description="Who's your target audience? For example: purple looking people, breaking up bfs, etc."
+          />
+          <Textarea
+            placeholder="Start typing, fear not!"
+            value={personalNotes}
+            onChange={personalNotesChange}
+            label="Personal Notes"
+            description="Any personal notes or additional instructions."
+          />
+
           <button className={styles.button} onClick={sendInputsToAPI}>
             Generate
           </button>
         </div>
         <div className={styles.right}>
+          <div className={styles.nav}>
+            <h1>
+              Content<span>Gen</span>
+            </h1>
+          </div>
           <div className={styles.title}>
             Bla bla bla is the meaning of life. What is the point of falling in
             love?

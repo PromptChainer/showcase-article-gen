@@ -1,19 +1,29 @@
 .textarea {
   padding: 10px;
-  font-size: 16px;
-  border-radius: 10px;
+  font-size: 14px;
+  border-radius: 5px;
   border: none;
-  box-shadow: 10px 20px 30px rgb(226, 230, 240);
-  color: #1d2134;
+  color: white;
+  background-color: #2c303b;
+  margin: 10px 0;
+  width: 100%;
+  resize: vertical;
+}
+
+.textarea::placeholder {
+  color: #b8bac7;
+}
+.textarea[type="text"]:focus {
+  border: #6d96f7;
 }
 
 .description {
   font-size: 14px;
-  margin: 5px 0 10px 0;
-  opacity: 0.45;
-  color: #1d2134;
+  margin-bottom: 40px;
+  color: #b8bac7;
 }
 
 .label {
-  color: #333;
+  color: white;
+  font-size: 14px;
 }

@@ -5,14 +5,13 @@ function Textarea({
   placeholder,
   value,
   onChange,
-  rows = 5,
+  rows = 1,
   label,
   description,
 }) {
   return (
     <div>
-      <label className={styles.label} style={{ color: '#333' }}>{label}</label>
-      <p className={styles.description}>{description}</p>
+      <label className={styles.label}>{label}</label>
       <textarea
         className={styles.textarea}
         placeholder={placeholder}
@@ -20,6 +19,7 @@ function Textarea({
         onChange={onChange}
         rows={rows}
       />
+      <p className={styles.description}>{description}</p>
     </div>
   );
 }
