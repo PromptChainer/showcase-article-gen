@@ -68,20 +68,20 @@ export default function Home() {
         const section = outputs.find(output => output.name === sectionName);
         return section ? (
           <>
-            <div className={sectionName === 'ready article' ? styles.title : styles.outputTitle}>{section.name}</div>
+            <div className={sectionName === 'Article' ? styles.title : styles.outputTitle}>{section.name}</div>
             <div className={styles.outputContent}>{section.output}</div>
           </>
         ) : null;
       };
   
-      const requiredSections = ["topics", "opening part", "ready article", "MetaDescription", "TL;DR"];
+      const requiredSections = ["Topics", "Opening", "Article", "Meta Description", "TL;DR"];
       const otherOutputs = outputs.filter(output => !requiredSections.includes(output.name));
   
       return (
         <>
-          {renderSection("topics")}
-          {renderSection("opening part")}
-          {renderSection("ready article")}
+          {renderSection("Topics")}
+          {renderSection("Opening")}
+          {renderSection("Article")}
           {otherOutputs.map((output) => (
             <>
               <div className={styles.outputTitle}>{output.name}</div>
@@ -90,7 +90,7 @@ export default function Home() {
           ))}
           <br />
           <br />
-          {renderSection("MetaDescription")}
+          {renderSection("Meta Description")}
           {renderSection("TL;DR")}
         </>
       );
