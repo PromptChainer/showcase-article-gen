@@ -69,6 +69,7 @@
   margin-bottom: 20px;
   color: #1d2134;
   padding: 0 20px;
+  text-align: center;
 }
 
 .content {
@@ -101,3 +102,15 @@
 .textarea-label {
   color: rgb(var(--foreground-rgb));
 }
+
+.outputTitle {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.outputContent {
+  margin-bottom: 10px;
+}
+

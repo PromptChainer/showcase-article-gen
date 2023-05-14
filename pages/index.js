@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Textarea from "@/components/textarea";
@@ -11,12 +10,12 @@ export default function Home() {
   const [targetAudience, setTargetAudience] = useState("");
   const [keywords, setKeywords] = useState("");
   const [personalNotes, setPersonalNotes] = useState("");
-  const [apiResponse, setApiResponse] = useState("");
+  const [apiResponse, setApiResponse] = useState(null);
 
   const sendInputsToAPI = async () => {
     try {
       const response = await fetch(
-        "https://prod.api.promptchainer.io/api/flows/run/clhgojgv60001u70hdt80bx0d",
+        "https://prod.api.promptchainer.io/api/flows/run/clhez045u0003s10gwx7xgr8o",
         {
           method: "POST",
           headers: {
@@ -36,7 +35,7 @@ export default function Home() {
 
       if (response.ok) {
         const data = await response.json();
-        setApiResponse(data[0].output);
+        setApiResponse(data);
       } else {
         throw new Error("Something went wrong with the API call");
       }
@@ -61,6 +60,47 @@ export default function Home() {
     setPersonalNotes(e.target.value);
   };
 
+  const renderOutputs = () => {
+    if (apiResponse) {
+      const outputs = apiResponse.filter((item) => item.type === "output");
+  
+      const renderSection = (sectionName) => {
+        const section = outputs.find(output => output.name === sectionName);
+        return section ? (
+          <>
+            <div className={sectionName === 'ready article' ? styles.title : styles.outputTitle}>{section.name}</div>
+            <div className={styles.outputContent}>{section.output}</div>
+          </>
+        ) : null;
+      };
+  
+      const requiredSections = ["topics", "opening part", "ready article", "MetaDescription", "TL;DR"];
+      const otherOutputs = outputs.filter(output => !requiredSections.includes(output.name));
+  
+      return (
+        <>
+          {renderSection("topics")}
+          {renderSection("opening part")}
+          {renderSection("ready article")}
+          {otherOutputs.map((output) => (
+            <>
+              <div className={styles.outputTitle}>{output.name}</div>
+              <div className={styles.outputContent}>{output.output}</div>
+            </>
+          ))}
+          <br />
+          <br />
+          {renderSection("MetaDescription")}
+          {renderSection("TL;DR")}
+        </>
+      );
+    } else {
+      return null;
+    }
+  };
+  
+  
+  
   return (
     <>
       <Head>
@@ -85,16 +125,6 @@ export default function Home() {
             label="Keywords"
             description="What would you like the content to include? It can be anything!"
           />
-          {/* <div className={styles.keywords}>
-            {keywords &&
-              keywords.split(",").map((keyword) => {
-                return (
-                  <p key={keyword.trim()} className={styles.keyword}>
-                    {keyword}
-                  </p>
-                );
-              })}
-          </div> */}
           <Textarea
             placeholder="Start typing, fear not!"
             value={targetAudience}
@@ -120,11 +150,7 @@ export default function Home() {
               Content<span>Gen</span>
             </h1>
           </div>
-          <div className={styles.title}>
-            Bla bla bla is the meaning of life. What is the point of falling in
-            love?
-          </div>
-          <div className={styles.content}>{apiResponse}</div>
+          <div className={styles.content}>{renderOutputs()}</div>
         </div>
       </main>
     </>
