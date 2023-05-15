@@ -9,24 +9,14 @@
 }
 
 .left {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  padding: 15px;
   border-radius: 10px;
   background-color: #1e1f24;
   height: calc(100vh - 100px);
-  overflow: scroll;
-}
-
-.left::-webkit-scrollbar {
-  display: none;
 }
 
 .nav {
   background: #1d2134;
   padding: 10px 20px;
-  margin-bottom: 20px;
 }
 
 .nav h1 {
@@ -38,6 +28,24 @@
   font-weight: normal;
 }
 
+.fieldsHolder {
+  height: calc(100% - 67px);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 15px;
+  overflow: scroll;
+}
+
+.fieldsHolder::-webkit-scrollbar {
+  display: none;
+}
+
+.buttonHolder {
+  padding: 15px;
+  width: 100%;
+}
+
 .button {
   padding: 10px;
   border-radius: 5px;
@@ -45,6 +53,7 @@
   font-size: 14px;
   background-color: #6d96f7;
   color: white;
+  width: 100%;
 }
 
 .button:hover {
@@ -54,9 +63,9 @@
 
 .right {
   height: calc(100vh - 100px);
-  overflow: scroll;
   border-radius: 10px;
   background-color: white;
+  overflow: hidden;
 }
 
 .right::-webkit-scrollbar {
@@ -72,11 +81,33 @@
   text-align: center;
 }
 
+.contentHolder {
+  overflow: scroll;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
 .content {
   font-size: 14px;
   line-height: 1.5;
   color: #4b4f60;
   padding: 0 20px;
+}
+
+/* width */
+.contentHolder::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.contentHolder::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.contentHolder::-webkit-scrollbar-thumb {
+  background: #eaeced;
 }
 
 .keywords {
@@ -105,12 +136,12 @@
 
 .outputTitle {
   font-weight: bold;
-  font-size: 1.2em;
-  padding: 5px;
+  font-size: 24px;
+  padding: 5px 0;
   margin-bottom: 5px;
+  color: #1d2134;
 }
 
 .outputContent {
   margin-bottom: 10px;
 }
-

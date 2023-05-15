@@ -63,20 +63,36 @@ export default function Home() {
   const renderOutputs = () => {
     if (apiResponse) {
       const outputs = apiResponse.filter((item) => item.type === "output");
-  
+
       const renderSection = (sectionName) => {
-        const section = outputs.find(output => output.name === sectionName);
+        const section = outputs.find((output) => output.name === sectionName);
         return section ? (
           <>
-            <div className={sectionName === 'ready article' ? styles.title : styles.outputTitle}>{section.name}</div>
+            <h2
+              className={
+                sectionName === "ready article"
+                  ? styles.title
+                  : styles.outputTitle
+              }
+            >
+              {section.name}
+            </h2>
             <div className={styles.outputContent}>{section.output}</div>
           </>
         ) : null;
       };
-  
-      const requiredSections = ["topics", "opening part", "ready article", "MetaDescription", "TL;DR"];
-      const otherOutputs = outputs.filter(output => !requiredSections.includes(output.name));
-  
+
+      const requiredSections = [
+        "topics",
+        "opening part",
+        "ready article",
+        "MetaDescription",
+        "TL;DR",
+      ];
+      const otherOutputs = outputs.filter(
+        (output) => !requiredSections.includes(output.name)
+      );
+
       return (
         <>
           {renderSection("topics")}
@@ -84,7 +100,7 @@ export default function Home() {
           {renderSection("ready article")}
           {otherOutputs.map((output) => (
             <>
-              <div className={styles.outputTitle}>{output.name}</div>
+              <h2 className={styles.outputTitle}>{output.name}</h2>
               <div className={styles.outputContent}>{output.output}</div>
             </>
           ))}
@@ -98,9 +114,7 @@ export default function Home() {
       return null;
     }
   };
-  
-  
-  
+
   return (
     <>
       <Head>
@@ -111,38 +125,41 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.left}>
-          <Textarea
-            placeholder="Start typing, fear not!"
-            value={subject}
-            onChange={subjectChange}
-            label="Subject"
-            description="What would you like the article to be about? It can be more than one word."
-          />
-          <Textarea
-            placeholder="Start typing, fear not!"
-            value={keywords}
-            onChange={keywordsChange}
-            label="Keywords"
-            description="What would you like the content to include? It can be anything!"
-          />
-          <Textarea
-            placeholder="Start typing, fear not!"
-            value={targetAudience}
-            onChange={targetAudienceChange}
-            label="Target Audience"
-            description="Who's your target audience? For example: purple looking people, breaking up bfs, etc."
-          />
-          <Textarea
-            placeholder="Start typing, fear not!"
-            value={personalNotes}
-            onChange={personalNotesChange}
-            label="Personal Notes"
-            description="Any personal notes or additional instructions."
-          />
-
-          <button className={styles.button} onClick={sendInputsToAPI}>
-            Generate
-          </button>
+          <div className={styles.fieldsHolder}>
+            <Textarea
+              placeholder="Start typing, fear not!"
+              value={subject}
+              onChange={subjectChange}
+              label="Subject"
+              description="What would you like the article to be about? It can be more than one word."
+            />
+            <Textarea
+              placeholder="Start typing, fear not!"
+              value={keywords}
+              onChange={keywordsChange}
+              label="Keywords"
+              description="What would you like the content to include? It can be anything!"
+            />
+            <Textarea
+              placeholder="Start typing, fear not!"
+              value={targetAudience}
+              onChange={targetAudienceChange}
+              label="Target Audience"
+              description="Who's your target audience? For example: purple looking people, breaking up bfs, etc."
+            />
+            <Textarea
+              placeholder="Start typing, fear not!"
+              value={personalNotes}
+              onChange={personalNotesChange}
+              label="Personal Notes"
+              description="Any personal notes or additional instructions."
+            />
+          </div>
+          <div className={styles.buttonHolder}>
+            <button className={styles.button} onClick={sendInputsToAPI}>
+              Generate
+            </button>
+          </div>
         </div>
         <div className={styles.right}>
           <div className={styles.nav}>
@@ -150,7 +167,9 @@ export default function Home() {
               Content<span>Gen</span>
             </h1>
           </div>
-          <div className={styles.content}>{renderOutputs()}</div>
+          <div className={styles.contentHolder}>
+            <div className={styles.content}>{renderOutputs()}</div>
+          </div>
         </div>
       </main>
     </>
