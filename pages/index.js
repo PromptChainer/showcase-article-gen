@@ -28,7 +28,7 @@ export default function Home() {
               targetAudience,
               personalNotes,
             },
-            apiKey: "4b67a848-ab83-48b4-b8f3-de6ba41d92e9",
+            apiKey: process.env.NEXT_PUBLIC_API_KEY,
           }),
         }
       );
