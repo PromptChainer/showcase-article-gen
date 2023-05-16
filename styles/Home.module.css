@@ -33,12 +33,22 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  padding: 15px;
-  overflow: scroll;
+  padding: 15px 10px 0px 15px;
+  overflow-y: scroll;
 }
 
 .fieldsHolder::-webkit-scrollbar {
-  display: none;
+  width: 5px;
+}
+
+/* Track */
+.fieldsHolder::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.fieldsHolder::-webkit-scrollbar-thumb {
+  background: #7d8a90;
 }
 
 .buttonHolder {
