@@ -217,14 +217,26 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className={styles.right}>
-          <div className={styles.nav}>
-            <h1>
-              Content<span>Gen</span>
-            </h1>
-          </div>
-          <div className={styles.contentHolder}>
-            <div className={styles.content}>{renderOutputs()}</div>
+        <div className={styles.outputArea}>
+          <div className={styles.right}>
+            <div className={styles.nav}>
+              <h1>
+                Content<span>Gen</span>
+              </h1>
+            </div>
+            <div className={styles.content}>
+              {loading ? (
+                <div className={styles.loader}>
+                  <img
+                    src="https://thumbs.gfycat.com/AgonizingImaginaryInvisiblerail-max-1mb.gif"
+                    alt="Loading"
+                  />
+                  <p>{randomSentence}</p>
+                </div>
+              ) : (
+                renderOutputs()
+              )}
+            </div>
           </div>
         </div>
       </main>
