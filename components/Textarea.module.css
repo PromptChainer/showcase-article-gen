@@ -19,11 +19,26 @@
 
 .description {
   font-size: 14px;
-  margin-bottom: 40px;
-  color: #b8bac7;
+  margin-bottom: 30px;
+  color: #848694;
 }
 
 .label {
+  color: white;
+  font-size: 14px;
+}
+
+.keywords {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.keyword {
+  padding: 5px 10px;
+  border-radius: 100px;
+  background-color: #4b4f60;
   color: white;
   font-size: 14px;
 }

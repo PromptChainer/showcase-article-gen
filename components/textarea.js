@@ -8,6 +8,7 @@ function Textarea({
   rows = 1,
   label,
   description,
+  isKeywords = false,
 }) {
   return (
     <div>
@@ -19,6 +20,17 @@ function Textarea({
         onChange={onChange}
         rows={rows}
       />
+      {isKeywords && value && (
+        <div className={styles.keywords}>
+          {value.split(",").map((keyword, i) => {
+            return (
+              <div key={i} className={styles.keyword}>
+                {keyword}
+              </div>
+            );
+          })}
+        </div>
+      )}
       <p className={styles.description}>{description}</p>
     </div>
   );

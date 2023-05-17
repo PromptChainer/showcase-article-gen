@@ -12,6 +12,7 @@
   border-radius: 10px;
   background-color: #1e1f24;
   height: calc(100vh - 100px);
+  position: relative;
 }
 
 .nav {
@@ -29,12 +30,13 @@
 }
 
 .fieldsHolder {
-  height: calc(100% - 67px);
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
   padding: 15px 10px 0px 15px;
   overflow-y: scroll;
+  padding-bottom: 47px;
 }
 
 .fieldsHolder::-webkit-scrollbar {
@@ -54,6 +56,9 @@
 .buttonHolder {
   padding: 15px;
   width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: transparent;
 }
 
 .button {
@@ -120,26 +125,6 @@
   background: #eaeced;
 }
 
-.keywords {
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-}
-
-.keyword {
-  padding: 5px 10px;
-  border-radius: 100px;
-  background-color: #4b4f60;
-  color: white;
-  font-size: 14px;
-}
-
-@media screen and (max-width: 768px) {
-  .main {
-    grid-template-columns: 1fr;
-  }
-}
-
 .textarea-label {
   color: rgb(var(--foreground-rgb));
 }
@@ -154,4 +139,38 @@
 
 .outputContent {
   margin-bottom: 10px;
+}
+
+.emptyHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty p {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-height: 650px) {
+  .main {
+    grid-gap: 5px;
+    padding: unset;
+  }
+  .left,
+  .right {
+    height: 100vh;
+  }
 }

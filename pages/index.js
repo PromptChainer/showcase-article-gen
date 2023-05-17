@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Textarea from "@/components/textarea";
 import { useState } from "react";
+import Image from "next/image";
+import robot from "@/assets/robot-small.png";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -146,7 +148,12 @@ export default function Home() {
         </>
       );
     } else {
-      return null;
+      return (
+        <div className={styles.empty}>
+          <Image src={robot} height={200} width={200} />
+          <p>Add your inputs and click the button to generate content!</p>
+        </div>
+      );
     }
   };
 
@@ -173,8 +180,10 @@ export default function Home() {
               value={keywords}
               onChange={keywordsChange}
               label="Keywords"
+              isKeywords={true}
               description="What would you like the content to include? It can be anything!"
             />
+
             <Textarea
               placeholder="Start typing, fear not!"
               value={targetAudience}
@@ -188,6 +197,7 @@ export default function Home() {
               onChange={personalNotesChange}
               label="Personal Notes"
               description="Any personal notes or additional instructions."
+              rows={2}
             />
           </div>
           <div className={styles.buttonHolder}>
@@ -203,7 +213,13 @@ export default function Home() {
             </h1>
           </div>
           <div className={styles.contentHolder}>
-            <div className={styles.content}>{renderOutputs()}</div>
+            <div
+              className={`${styles.content} ${
+                apiResponse === null ? styles.emptyHolder : ""
+              }`}
+            >
+              {renderOutputs()}
+            </div>
           </div>
         </div>
       </main>
