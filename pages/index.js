@@ -1,18 +1,36 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import Textarea from "@/components/textarea";
+import styles from "../styles/Home.module.css";
+import Textarea from "../components/textarea";
 import { useState } from "react";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [subject, setSubject] = useState("");
-  const [targetAudience, setTargetAudience] = useState("");
-  const [keywords, setKeywords] = useState("");
-  const [personalNotes, setPersonalNotes] = useState("");
   const [apiResponse, setApiResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [subject, setSubject] = useState("");
+  const [keywords, setKeywords] = useState("");
+  const [targetAudience, setTargetAudience] = useState("");
+  const [personalNotes, setPersonalNotes] = useState("");
+  // Use dev only. Comment for prod:
+  // const [subject, setSubject] = useState("Car loans in the USA");
+  // const [keywords, setKeywords] = useState("car loan");
+  // const [targetAudience, setTargetAudience] = useState("car buyers");
+  // const [personalNotes, setPersonalNotes] = useState(
+  //   "PromptChainer is a revolutionary visual flow builder that enables users to design and fine-tune AI prompt chains with unparalleled ease and precision. By integrating AI and traditional programming methodologies, it opens up a world of possibilities for both coders and non-coders alike. With its intuitive interface, users can create customized AI-driven solutions, ranging from chatbots to content generation, all within a simple, visually-guided environment. As PromptChainer continues to evolve, it aims to make complex AI integrations accessible and manageable for a diverse range of users, driving innovation and empowering businesses across various industries."
+  // );
+
+  const loaderSentences = [
+    "Distracting AI from world domination plans...",
+    "Teaching AI to write sonnets...",
+    "Running the hamsters powering the AI...",
+  ];
+  const randomSentence =
+    loaderSentences[Math.floor(Math.random() * loaderSentences.length)];
 
   const sendInputsToAPI = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         "https://prod.api.promptchainer.io/api/flows/run/clhez045u0003s10gwx7xgr8o",
@@ -43,6 +61,8 @@ export default function Home() {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -125,7 +145,8 @@ export default function Home() {
         (output) =>
           !requiredSections.includes(output.name) &&
           !output.name.startsWith("Title") &&
-          !output.name.startsWith("Paragraph")
+          !output.name.startsWith("Paragraph") &&
+          !output.name.endsWith("Paragraph")
       );
 
       return (
@@ -193,13 +214,27 @@ export default function Home() {
             Generate
           </button>
         </div>
-        <div className={styles.right}>
-          <div className={styles.nav}>
-            <h1>
-              Content<span>Gen</span>
-            </h1>
+        <div className={styles.outputArea}>
+          <div className={styles.right}>
+            <div className={styles.nav}>
+              <h1>
+                Content<span>Gen</span>
+              </h1>
+            </div>
+            <div className={styles.content}>
+              {loading ? (
+                <div className={styles.loader}>
+                  <img
+                    src="https://thumbs.gfycat.com/AgonizingImaginaryInvisiblerail-max-1mb.gif"
+                    alt="Loading"
+                  />
+                  <p>{randomSentence}</p>
+                </div>
+              ) : (
+                renderOutputs()
+              )}
+            </div>
           </div>
-          <div className={styles.content}>{renderOutputs()}</div>
         </div>
       </main>
     </>
