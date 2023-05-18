@@ -29,7 +29,7 @@ function Textarea({
   useEffect(() => {
     const textarea = textareaRef?.current;
     textarea.addEventListener("input", resizeTextarea);
-    resizeTextarea(); // Initial on load
+    resizeTextarea();
 
     return () => {
       textarea.removeEventListener("input", resizeTextarea);
