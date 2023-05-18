@@ -77,4 +77,3 @@ You get a PromptChainer use case and you get a PromptChainer use case and you ge
 ## 📫 Contact
 
 Email: supportPromptChainer@gmail.com
-Project Link: [https://github.com/PromptChainer/showcase-article-gen]
