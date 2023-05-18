@@ -54,28 +54,27 @@ Open http://localhost:3000 with your browser to see the result.
 
 After you've started the application, you will find four text inputs:
 
-Subject: The main topic of the article.
-Keywords: Important words that should be included in the article.
-Target Audience: The primary readers or viewers that the article will be targeting.
-Personal Notes: Any additional instructions or guidelines for the content.
+1. **Subject**: The main topic of the article.
+2. **Keywords**: Important words that should be included in the article.
+3. **Target Audience**: The primary readers or viewers that the article will be targeting.
+4. **Personal Notes**: Any additional instructions or guidelines for the content.
+
 After filling in the desired fields, click on the 'Generate' button and the marvelous content will be created and displayed on the right side of the application.
 
 ## 🔖 Components
 
 The React components written:
-Textarea: This is a dynamic textarea component. It resizes based on input, handles placeholder, value, onChange events, and provides optional rows and columns properties.
+- **Textarea**: This is a dynamic textarea component. It resizes based on input, handles placeholder, value, onChange events, and provides optional rows and columns properties.
 
 ## 💼 Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+Pull requestsm suggestions and improvemnts are welcome!
 
 ## 📝 License
 
-Distributed under the MIT License. See LICENSE for more information.
+You get a PromptChainer use case and you get a PromptChainer use case and you get a PromptChainer use case...
 
 ## 📫 Contact
 
-supportPromptChainer@gmail.com
+Email: supportPromptChainer@gmail.com
 Project Link: [https://github.com/PromptChainer/showcase-article-gen]
