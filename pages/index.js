@@ -29,6 +29,80 @@ export default function Home() {
     "Distracting AI from world domination plans...",
     "Teaching AI to write sonnets...",
     "Running the hamsters powering the AI...",
+    "Load it and they will come",
+    "Convincing AI not to turn evil..",
+    "There is no spoon. Because we are not done loading it",
+    "Your left thumb points to the right and your right thumb points to the left.",
+    "How did you get here?",
+    "Wait, do you smell something burning?",
+    "Computing the secret to life, the universe, and everything.",
+    "When nothing is going right, go left!!...",
+    "I love my job only when I'm on vacation...",
+    "I'm not lazy, I'm just relaxed!!",
+    "Never steal. The government hates competition....",
+    "Why are they called apartments if they are all stuck together?",
+    "Life is Short – Talk Fast!!!!",
+    "Optimism – is a lack of information.....",
+    "Save water and shower together",
+    "Whenever I find the key to success, someone changes the lock.",
+    "Sometimes I think war is God’s way of teaching us geography.",
+    "I’ve got a problem for your solution…..",
+    "Where there’s a will, there’s a relative.",
+    "User: the word computer professionals use when they mean !!idiot!!",
+    "Adults are just kids with money.",
+    "I think I am, therefore, I am. I think.",
+    "A kiss is like a fight, with mouths.",
+    "You don’t pay taxes—they take taxes.",
+    "Coffee, Chocolate, Men. The richer the better!",
+    "I am free of all prejudices. I hate everyone equally.",
+    "git happens",
+    "May the forks be with you",
+    "A commit a day keeps the mobs away",
+    "This is not a joke, it's a commit.",
+    "Constructing additional pylons...",
+    "Roping some seaturtles...",
+    "Locating Jebediah Kerman...",
+    "We are not liable for any broken screens as a result of waiting.",
+    "Hello IT, have you tried turning it off and on again?",
+    "If you type Google into Google you can break the internet",
+    "Well, this is embarrassing.",
+    "What is the airspeed velocity of an unladen swallow?",
+    "Hello, IT... Have you tried forcing an unexpected reboot?",
+    "They just toss us away like yesterday's jam.",
+    "They're fairly regular, the beatings, yes. I'd say we're on a bi-weekly beating.",
+    "The Elders of the Internet would never stand for it.",
+    "Space is invisible mind dust, and stars are but wishes.",
+    "Didn't know paint dried so quickly.",
+    "Everything sounds the same",
+    "I'm going to walk the dog",
+    "I didn't choose engineering life. The engineering life chose me.",
+    "Dividing by zero...",
+    "Spawn more Overlord!",
+    "If I’m not back in five minutes, just wait longer.",
+    "Chuck Norris never git push. The repo pulls before.",
+    "PromptChainer developers do it with <style>",
+    "I need to git pull --my-life-together",
+    "Proving P=NP...",
+    "Trying to sort in O(n)...",
+    "Please wait while the intern refills his coffee.",
+    "Please hold on as we reheat our coffee",
+    "Kindly hold on as we convert this bug to a feature...",
+    "Kindly hold on as our intern quits PromptChainer...",
+    "Winter is coming...",
+    "Distracted by cat gifs",
+    "Finding someone to hold my beer",
+    "BRB, working on my side project",
+    "TODO: Insert a witty loading message",
+    "Let's hope it's worth the wait",
+    "Aw, snap! Not..",
+    "Ordering 1s and 0s...",
+    "Updating dependencies...",
+    "Whatever you do, don't look behind you...",
+    "Please wait... Consulting the manual...",
+    "It is dark. You're likely to be eaten by a grue.",
+    "Loading funny message...",
+    "Waiting for Daenerys to say all her titles...",
+    "Feel free to spin in your chair",
   ];
   const randomSentence =
     loaderSentences[Math.floor(Math.random() * loaderSentences.length)];
@@ -204,7 +278,7 @@ export default function Home() {
               onChange={keywordsChange}
               label="Keywords"
               isKeywords={true}
-              description="What would you like the content to include? It can be anything!"
+              description="Seperate keywords by commas."
             />
 
             <Textarea
@@ -212,7 +286,7 @@ export default function Home() {
               value={targetAudience}
               onChange={targetAudienceChange}
               label="Target Audience"
-              description="Who's your target audience? For example: purple looking people, breaking up bfs, etc."
+              description="Who's your target audience? For example: purple looking people, bfs that break up with you although you're a lovely gal, etc."
             />
             <Textarea
               placeholder="Start typing, fear not!"
