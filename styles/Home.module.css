@@ -18,6 +18,13 @@
 .nav {
   background: #1d2134;
   padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLoading {
+  background: #bfc1c4;
 }
 
 .nav h1 {
@@ -179,11 +186,8 @@
 }
 
 .loader {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,8 +195,17 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
-.loader img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.loader p {
+  margin-top: 10px;
+}
+
+.poweredBy {
+  display: flex;
+  align-items: center;
+}
+
+.poweredBy p {
+  font-size: 12px;
+  color: white;
+  margin-right: 5px;
 }
