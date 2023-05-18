@@ -17,13 +17,7 @@ export default function Home() {
   const [keywords, setKeywords] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
   const [personalNotes, setPersonalNotes] = useState("");
-  // Use dev only. Comment for prod:
-  // const [subject, setSubject] = useState("Car loans in the USA");
-  // const [keywords, setKeywords] = useState("car loan");
-  // const [targetAudience, setTargetAudience] = useState("car buyers");
-  // const [personalNotes, setPersonalNotes] = useState(
-  //   "PromptChainer is a revolutionary visual flow builder that enables users to design and fine-tune AI prompt chains with unparalleled ease and precision. By integrating AI and traditional programming methodologies, it opens up a world of possibilities for both coders and non-coders alike. With its intuitive interface, users can create customized AI-driven solutions, ranging from chatbots to content generation, all within a simple, visually-guided environment. As PromptChainer continues to evolve, it aims to make complex AI integrations accessible and manageable for a diverse range of users, driving innovation and empowering businesses across various industries."
-  // );
+  const [isValid, setIsValid] = useState(true);
 
   const loaderSentences = [
     "Distracting AI from world domination plans...",
@@ -31,53 +25,24 @@ export default function Home() {
     "Running the hamsters powering the AI...",
     "Load it and they will come",
     "Convincing AI not to turn evil..",
-    "There is no spoon. Because we are not done loading it",
     "Your left thumb points to the right and your right thumb points to the left.",
-    "How did you get here?",
-    "Wait, do you smell something burning?",
     "Computing the secret to life, the universe, and everything.",
-    "When nothing is going right, go left!!...",
-    "I love my job only when I'm on vacation...",
-    "I'm not lazy, I'm just relaxed!!",
     "Never steal. The government hates competition....",
-    "Why are they called apartments if they are all stuck together?",
-    "Life is Short – Talk Fast!!!!",
     "Optimism – is a lack of information.....",
     "Save water and shower together",
-    "Whenever I find the key to success, someone changes the lock.",
-    "Sometimes I think war is God’s way of teaching us geography.",
     "I’ve got a problem for your solution…..",
     "Where there’s a will, there’s a relative.",
-    "User: the word computer professionals use when they mean !!idiot!!",
-    "Adults are just kids with money.",
-    "I think I am, therefore, I am. I think.",
-    "A kiss is like a fight, with mouths.",
-    "You don’t pay taxes—they take taxes.",
-    "Coffee, Chocolate, Men. The richer the better!",
-    "I am free of all prejudices. I hate everyone equally.",
     "git happens",
     "May the forks be with you",
-    "A commit a day keeps the mobs away",
+    "A commit a day keeps the doctor away",
     "This is not a joke, it's a commit.",
     "Constructing additional pylons...",
     "Roping some seaturtles...",
-    "Locating Jebediah Kerman...",
     "We are not liable for any broken screens as a result of waiting.",
-    "Hello IT, have you tried turning it off and on again?",
-    "If you type Google into Google you can break the internet",
-    "Well, this is embarrassing.",
-    "What is the airspeed velocity of an unladen swallow?",
-    "Hello, IT... Have you tried forcing an unexpected reboot?",
-    "They just toss us away like yesterday's jam.",
-    "They're fairly regular, the beatings, yes. I'd say we're on a bi-weekly beating.",
     "The Elders of the Internet would never stand for it.",
-    "Space is invisible mind dust, and stars are but wishes.",
-    "Didn't know paint dried so quickly.",
-    "Everything sounds the same",
     "I'm going to walk the dog",
     "I didn't choose engineering life. The engineering life chose me.",
     "Dividing by zero...",
-    "Spawn more Overlord!",
     "If I’m not back in five minutes, just wait longer.",
     "Chuck Norris never git push. The repo pulls before.",
     "PromptChainer developers do it with <style>",
@@ -96,18 +61,30 @@ export default function Home() {
     "Let's hope it's worth the wait",
     "Aw, snap! Not..",
     "Ordering 1s and 0s...",
-    "Updating dependencies...",
     "Whatever you do, don't look behind you...",
     "Please wait... Consulting the manual...",
-    "It is dark. You're likely to be eaten by a grue.",
     "Loading funny message...",
     "Waiting for Daenerys to say all her titles...",
     "Feel free to spin in your chair",
   ];
+
   const randomSentence =
     loaderSentences[Math.floor(Math.random() * loaderSentences.length)];
 
+  const validateForm = () => {
+    if (!subject && !keywords && !targetAudience && !personalNotes) {
+      setIsValid(false);
+      return false;
+    }
+    setIsValid(true);
+    return true;
+  };
+
   const sendInputsToAPI = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch(
@@ -248,7 +225,7 @@ export default function Home() {
       return (
         <div className={styles.empty}>
           <Image src={robot} alt="robot" height={200} width={200} />
-          <p>Add your inputs and click the button to generate content!</p>
+          <p>Add inputs and click the button to generate content</p>
         </div>
       );
     }
@@ -299,7 +276,7 @@ export default function Home() {
           </div>
           <div className={styles.buttonHolder}>
             <button className={styles.button} onClick={sendInputsToAPI}>
-              {loading ? "Hold on tight" : "Generate"}
+              {loading ? "Baking an article" : "Generate"}
             </button>
           </div>
         </div>
