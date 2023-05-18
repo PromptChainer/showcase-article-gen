@@ -3,7 +3,11 @@ import { Inter } from "next/font/google";
 import styles from "../styles/Home.module.css";
 import Textarea from "../components/textarea";
 import { useState } from "react";
-
+import Image from "next/image";
+import Link from "next/link";
+import robot from "@/assets/robot-small.png";
+import logo from "@/assets/PromptChainLogo.svg";
+import Loader from "@/components/loader/loader";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -167,7 +171,12 @@ export default function Home() {
         </>
       );
     } else {
-      return null;
+      return (
+        <div className={styles.empty}>
+          <Image src={robot} alt="robot" height={200} width={200} />
+          <p>Add your inputs and click the button to generate content!</p>
+        </div>
+      );
     }
   };
 
@@ -194,8 +203,10 @@ export default function Home() {
               value={keywords}
               onChange={keywordsChange}
               label="Keywords"
+              isKeywords={true}
               description="What would you like the content to include? It can be anything!"
             />
+
             <Textarea
               placeholder="Start typing, fear not!"
               value={targetAudience}
@@ -209,33 +220,44 @@ export default function Home() {
               onChange={personalNotesChange}
               label="Personal Notes"
               description="Any personal notes or additional instructions."
+              rows={2}
             />
           </div>
           <div className={styles.buttonHolder}>
             <button className={styles.button} onClick={sendInputsToAPI}>
-              Generate
+              {loading ? "Hold on tight" : "Generate"}
             </button>
           </div>
         </div>
         <div className={styles.outputArea}>
           <div className={styles.right}>
-            <div className={styles.nav}>
+            <div
+              className={`${styles.nav} ${loading ? styles.navLoading : ""}`}
+            >
               <h1>
                 Content<span>Gen</span>
               </h1>
-            </div>
-            <div className={styles.content}>
-              {loading ? (
-                <div className={styles.loader}>
-                  <img
-                    src="https://thumbs.gfycat.com/AgonizingImaginaryInvisiblerail-max-1mb.gif"
-                    alt="Loading"
-                  />
-                  <p>{randomSentence}</p>
+              <Link target="_blank" href="https://promptchainer.io/">
+                <div className={styles.poweredBy}>
+                  <p>Powered by:</p> <Image alt="logo" src={logo} height={20} />
                 </div>
-              ) : (
-                renderOutputs()
-              )}
+              </Link>
+            </div>
+            <div className={styles.contentHolder}>
+              <div
+                className={`${styles.content} ${
+                  apiResponse === null ? styles.emptyHolder : ""
+                }`}
+              >
+                {loading ? (
+                  <div className={styles.loader}>
+                    <Loader />
+                    <p>{randomSentence}</p>
+                  </div>
+                ) : (
+                  renderOutputs()
+                )}
+              </div>
             </div>
           </div>
         </div>
