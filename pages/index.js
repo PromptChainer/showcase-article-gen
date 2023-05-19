@@ -19,13 +19,6 @@ export default function Home() {
   const [keywords, setKeywords] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
   const [personalNotes, setPersonalNotes] = useState("");
-  // // Uncomment for dev:
-  // const [subject, setSubject] = useState("Car loans in the USA");
-  // const [keywords, setKeywords] = useState("car loan");
-  // const [targetAudience, setTargetAudience] = useState("car buyers");
-  // const [personalNotes, setPersonalNotes] = useState(
-  //   "PromptChainer is a revolutionary visual flow builder that enables users to design and fine-tune AI prompt chains with unparalleled ease and precision. By integrating AI and traditional programming methodologies, it opens up a world of possibilities for both coders and non-coders alike. With its intuitive interface, users can create customized AI-driven solutions, ranging from chatbots to content generation, all within a simple, visually-guided environment. As PromptChainer continues to evolve, it aims to make complex AI integrations accessible and manageable for a diverse range of users, driving innovation and empowering businesses across various industries."
-  // );
 
   const loaderSentences = [
     "Orit rules this land together with Aryeh the grand shepherd ❤️",
@@ -70,7 +63,6 @@ export default function Home() {
     "Waiting for Aryeh and Chasey to finish barking at the door...",
   ];
 
-  const [sentenceIdx, setSentenceIdx] = useState(0);
   const [randomSentence, setRandomSentence] = useState(
     loaderSentences[Math.floor(Math.random() * loaderSentences.length)]
   );
@@ -81,15 +73,20 @@ export default function Home() {
     setRandomSentence(newSentence);
   };
 
+  const calculateDisplayTime = (sentence) => {
+    // Each word displays for 300ms, then a 50ms wait between words, then a 2s wait after the sentence
+    return sentence.split(" ").length * 350 + 2000;
+  };
+
   useEffect(() => {
     const sentenceInterval = setInterval(() => {
       setNewRandomSentence();
-    }, 5000);
+    }, calculateDisplayTime(randomSentence));
 
     return () => {
       clearInterval(sentenceInterval);
     };
-  }, []);
+  }, [randomSentence]);
 
   const validateForm = () => {
     if (!subject && !keywords && !targetAudience && !personalNotes) {
@@ -161,27 +158,40 @@ export default function Home() {
     const [currentSentenceIdx, setCurrentSentenceIdx] = useState(
       Math.floor(Math.random() * loaderSentences.length)
     );
-    const currentSentence = loaderSentences[currentSentenceIdx];
-  
+    const currentDisplaySentence = randomSentence;
+    const [displayTimeout, setDisplayTimeout] = useState(null);
+
+    const calculateDisplayTime = (sentence) => {
+      // Each word displays for 300ms, then a 50ms wait between words, then a 2s wait after the sentence
+      return sentence.split(" ").length * 300 + 2000;
+    };
+
     useEffect(() => {
-      const words = currentSentence.split(' ');
-      const sentenceDuration = words.length * 250;
-  
-      const interval = setInterval(() => {
-        setCurrentSentenceIdx(
-          (prevIdx) =>
-            (prevIdx + 1 + Math.floor(Math.random() * 3)) % loaderSentences.length
-        );
-      }, sentenceDuration + 2000); // +2000ms so that there's a delay before the next sentence starts
-  
-      return () => clearInterval(interval);
-    }, [currentSentenceIdx]); // Re-run the effect when currentSentenceIdx changes
-  
+      // Clear existing timeout
+      if (displayTimeout) {
+        clearTimeout(displayTimeout);
+      }
+
+      // Set new timeout
+      const newTimeout = setTimeout(() => {
+        const nextSentenceIdx =
+          (currentSentenceIdx + 1) % loaderSentences.length;
+        setCurrentSentenceIdx(nextSentenceIdx);
+        setRandomSentence(loaderSentences[nextSentenceIdx]);
+      }, calculateDisplayTime(currentDisplaySentence));
+
+      // Save the timeout ID for clearing it later
+      setDisplayTimeout(newTimeout);
+
+      // Cleanup on unmount or update
+      return () => clearTimeout(newTimeout);
+    }, [currentDisplaySentence, currentSentenceIdx]);
+
     return (
       <div className={styles.loader}>
         <Loader />
         <p>
-          {currentSentence.split(" ").map((word, wordIdx) => (
+          {currentDisplaySentence.split(" ").map((word, wordIdx) => (
             <span
               className={styles["fade-in-word"]}
               key={wordIdx}
@@ -196,8 +206,8 @@ export default function Home() {
       </div>
     );
   };
-  
-    const renderOutputs = () => {
+
+  const renderOutputs = () => {
     if (apiResponse) {
       const outputs = apiResponse.filter((item) => item.type === "output");
 
