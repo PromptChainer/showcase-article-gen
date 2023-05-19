@@ -36,9 +36,8 @@ Or if you are using Yarn:
 yarn
 ```
 Copy the .env.example file and create a .env file in the root of the project. Add your PromptChain API key to the .env file:
-makefile
 ```bash
-NEXT_PUBLIC_API_KEY=your_api_key_here
+API_KEY=your_api_key_here
 ```
 Start the development server:
 ```bash
@@ -68,11 +67,11 @@ The React components written:
 
 ## 💼 Contributing
 
-Pull requestsm suggestions and improvemnts are welcome!
+Pull requests, suggestions and improvemnts are welcome!
 
 ## 📝 License
 
-You get a PromptChainer use case and you get a PromptChainer use case and you get a PromptChainer use case...
+Distributed under the MIT License. See LICENSE for more information.
 
 ## 📫 Contact
 

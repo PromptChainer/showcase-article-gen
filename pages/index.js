@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "../styles/Home.module.css";
-import Textarea from "../components/textarea";
+import Textarea from "../components/textarea/textarea";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -65,7 +65,7 @@ export default function Home() {
     "Please wait... Consulting the manual...",
     "Loading funny message...",
     "Waiting for Daenerys to say all her titles...",
-    "Feel free to spin in your chair",
+    "Feel free to spin in your chair"
   ];
 
   const randomSentence =
