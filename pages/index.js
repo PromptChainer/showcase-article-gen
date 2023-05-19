@@ -19,6 +19,7 @@ export default function Home() {
   const [personalNotes, setPersonalNotes] = useState("");
   const [isValid, setIsValid] = useState(true);
 
+
   const loaderSentences = [
     "Distracting AI from world domination plans...",
     "Teaching AI to write sonnets...",
@@ -93,7 +94,7 @@ export default function Home() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-api-key": process.env.API_KEY,
+            "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
           },
           body: JSON.stringify({
             variables: {

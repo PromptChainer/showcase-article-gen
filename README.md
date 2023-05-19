@@ -37,7 +37,7 @@ yarn
 ```
 Copy the .env.example file and create a .env file in the root of the project. Add your PromptChain API key to the .env file:
 ```bash
-API_KEY=your_api_key_here
+NEXT_PUBLIC_API_KEY=your_api_key_here
 ```
 Start the development server:
 ```bash
