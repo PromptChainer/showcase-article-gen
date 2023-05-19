@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "../styles/Home.module.css";
 import Textarea from "../components/textarea/textarea";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import robot from "@/assets/robot-small.png";
@@ -13,16 +13,23 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isValid, setIsValid] = useState(true);
+
   const [subject, setSubject] = useState("");
   const [keywords, setKeywords] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
   const [personalNotes, setPersonalNotes] = useState("");
-  const [isValid, setIsValid] = useState(true);
-
+  // // Uncomment for dev:
+  // const [subject, setSubject] = useState("Car loans in the USA");
+  // const [keywords, setKeywords] = useState("car loan");
+  // const [targetAudience, setTargetAudience] = useState("car buyers");
+  // const [personalNotes, setPersonalNotes] = useState(
+  //   "PromptChainer is a revolutionary visual flow builder that enables users to design and fine-tune AI prompt chains with unparalleled ease and precision. By integrating AI and traditional programming methodologies, it opens up a world of possibilities for both coders and non-coders alike. With its intuitive interface, users can create customized AI-driven solutions, ranging from chatbots to content generation, all within a simple, visually-guided environment. As PromptChainer continues to evolve, it aims to make complex AI integrations accessible and manageable for a diverse range of users, driving innovation and empowering businesses across various industries."
+  // );
 
   const loaderSentences = [
     "Orit rules this land together with Aryeh the grand shepherd ❤️",
-    "Making eccentric funny faces to AI to stop it from world domination...",
+    "Making funny faces to AI to stop it from world domination...",
     "Making the AI powering hamsters sweat real good...",
     "Load it and they will come.",
     "Having a philosophical chat with AI about right and wrong...",
@@ -56,13 +63,33 @@ export default function Home() {
     "Waiting for Daenerys to finish announcing all her titles...",
     "Feel free to spin in your chair...",
     "How many plants are currently in Promptchainer's office? Mail us your guess and the winner gets a filthy burgundy bean bag.",
-    "Waiting for Ofir's charachter to walk so so slowly in Heroes...",
+    "Waiting for Ofir's character to walk so so slowly in Heroes...",
     "Waiting for Dani to finish playing his guitar...",
-    "Waiting to finish listening to Simon's ideas for the future..."
+    "Waiting to finish listening to Simon's ideas for the future...",
+    "Waiting for Stoyan to finish his 5 hours workout...",
+    "Waiting for Aryeh and Chasey to finish barking at the door...",
   ];
 
-  const randomSentence =
-    loaderSentences[Math.floor(Math.random() * loaderSentences.length)];
+  const [sentenceIdx, setSentenceIdx] = useState(0);
+  const [randomSentence, setRandomSentence] = useState(
+    loaderSentences[Math.floor(Math.random() * loaderSentences.length)]
+  );
+
+  const setNewRandomSentence = () => {
+    const newSentence =
+      loaderSentences[Math.floor(Math.random() * loaderSentences.length)];
+    setRandomSentence(newSentence);
+  };
+
+  useEffect(() => {
+    const sentenceInterval = setInterval(() => {
+      setNewRandomSentence();
+    }, 5000);
+
+    return () => {
+      clearInterval(sentenceInterval);
+    };
+  }, []);
 
   const validateForm = () => {
     if (!subject && !keywords && !targetAudience && !personalNotes) {
@@ -129,6 +156,45 @@ export default function Home() {
   const personalNotesChange = (e) => {
     setPersonalNotes(e.target.value);
   };
+
+  const LoaderComponent = () => {
+    const [currentSentenceIdx, setCurrentSentenceIdx] = useState(
+      Math.floor(Math.random() * loaderSentences.length)
+    );
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentSentenceIdx(
+          (prevIdx) =>
+            (prevIdx + 1 + Math.floor(Math.random() * 3)) % loaderSentences.length
+        );
+      }, 6000); // Sentence display duration
+  
+      return () => clearInterval(interval);
+    }, []);
+  
+    const currentSentence = loaderSentences[currentSentenceIdx];
+  
+    return (
+      <div className={styles.loader}>
+        <Loader />
+        <p>
+          {currentSentence.split(" ").map((word, wordIdx) => (
+            <span
+              className={styles["fade-in-word"]}
+              key={wordIdx}
+              style={{
+                animationDelay: `${wordIdx * 250}ms`, // Word display duration
+              }}
+            >
+              {word}{" "}
+            </span>
+          ))}
+        </p>
+      </div>
+    );
+  };
+  
 
   const renderOutputs = () => {
     if (apiResponse) {
@@ -269,7 +335,9 @@ export default function Home() {
           </div>
           <div className={styles.buttonHolder}>
             <button className={styles.button} onClick={sendInputsToAPI}>
-              {loading ? "Baking an article" : "Generate an article, save my time!"}
+              {loading
+                ? "Baking an article"
+                : "Generate an article, save my time!"}
             </button>
           </div>
         </div>
@@ -293,14 +361,7 @@ export default function Home() {
                   apiResponse === null ? styles.emptyHolder : ""
                 }`}
               >
-                {loading ? (
-                  <div className={styles.loader}>
-                    <Loader />
-                    <p>{randomSentence}</p>
-                  </div>
-                ) : (
-                  renderOutputs()
-                )}
+                {loading ? <LoaderComponent /> : renderOutputs()}
               </div>
             </div>
           </div>
