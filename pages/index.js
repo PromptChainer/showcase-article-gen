@@ -161,19 +161,21 @@ export default function Home() {
     const [currentSentenceIdx, setCurrentSentenceIdx] = useState(
       Math.floor(Math.random() * loaderSentences.length)
     );
+    const currentSentence = loaderSentences[currentSentenceIdx];
   
     useEffect(() => {
+      const words = currentSentence.split(' ');
+      const sentenceDuration = words.length * 250;
+  
       const interval = setInterval(() => {
         setCurrentSentenceIdx(
           (prevIdx) =>
             (prevIdx + 1 + Math.floor(Math.random() * 3)) % loaderSentences.length
         );
-      }, 6000); // Sentence display duration
+      }, sentenceDuration + 2000); // +2000ms so that there's a delay before the next sentence starts
   
       return () => clearInterval(interval);
-    }, []);
-  
-    const currentSentence = loaderSentences[currentSentenceIdx];
+    }, [currentSentenceIdx]); // Re-run the effect when currentSentenceIdx changes
   
     return (
       <div className={styles.loader}>
@@ -195,8 +197,7 @@ export default function Home() {
     );
   };
   
-
-  const renderOutputs = () => {
+    const renderOutputs = () => {
     if (apiResponse) {
       const outputs = apiResponse.filter((item) => item.type === "output");
 
