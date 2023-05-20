@@ -215,7 +215,7 @@
 .fade-in-word {
   opacity: 0;
   animation: fadeIn 0.5s forwards;
-  animation-duration: 300ms;
+  animation-duration: 350ms;
 }
 
 @keyframes fadeIn {
