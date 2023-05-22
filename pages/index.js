@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import styles from "../styles/Home.module.css";
 import Textarea from "../components/textarea/textarea";
@@ -19,13 +20,13 @@ export default function Home() {
   // const [keywords, setKeywords] = useState("");
   // const [targetAudience, setTargetAudience] = useState("");
   // const [personalNotes, setPersonalNotes] = useState("");
-      // Use dev only. Comment for prod:
-      const [subject, setSubject] = useState("Car loans in the USA");
-      const [keywords, setKeywords] = useState("car loan");
-      const [targetAudience, setTargetAudience] = useState("car buyers");
-      const [personalNotes, setPersonalNotes] = useState(
-        "PromptChainer is a revolutionary visual flow builder that enables users to design and fine-tune AI prompt chains with unparalleled ease and precision. By integrating AI and traditional programming methodologies, it opens up a world of possibilities for both coders and non-coders alike. With its intuitive interface, users can create customized AI-driven solutions, ranging from chatbots to content generation, all within a simple, visually-guided environment. As PromptChainer continues to evolve, it aims to make complex AI integrations accessible and manageable for a diverse range of users, driving innovation and empowering businesses across various industries."
-      );
+  // Use dev only. Comment for prod:
+  const [subject, setSubject] = useState("Car loans in the USA");
+  const [keywords, setKeywords] = useState("car loan");
+  const [targetAudience, setTargetAudience] = useState("car buyers");
+  const [personalNotes, setPersonalNotes] = useState(
+    "PromptChainer is a revolutionary visual flow builder that enables users to design and fine-tune AI prompt chains with unparalleled ease and precision. By integrating AI and traditional programming methodologies, it opens up a world of possibilities for both coders and non-coders alike. With its intuitive interface, users can create customized AI-driven solutions, ranging from chatbots to content generation, all within a simple, visually-guided environment. As PromptChainer continues to evolve, it aims to make complex AI integrations accessible and manageable for a diverse range of users, driving innovation and empowering businesses across various industries."
+  );
 
   const loaderSentences = [
     "Orit rules this land together with Aryeh the grand shepherd ❤️",
@@ -316,6 +317,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-V8XSPF3BMR"
+        strategy="lazyOnload"
+      />
+      <Script id="gtag-init">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-V8XSPF3BMR');
+          `}
+      </Script>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.left}>
           <div className={styles.fieldsHolder}>
