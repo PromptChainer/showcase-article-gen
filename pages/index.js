@@ -16,17 +16,10 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
 
-  // const [subject, setSubject] = useState("");
-  // const [keywords, setKeywords] = useState("");
-  // const [targetAudience, setTargetAudience] = useState("");
-  // const [personalNotes, setPersonalNotes] = useState("");
-  // Use dev only. Comment for prod:
-  const [subject, setSubject] = useState("Car loans in the USA");
-  const [keywords, setKeywords] = useState("car loan");
-  const [targetAudience, setTargetAudience] = useState("car buyers");
-  const [personalNotes, setPersonalNotes] = useState(
-    "PromptChainer is a revolutionary visual flow builder that enables users to design and fine-tune AI prompt chains with unparalleled ease and precision. By integrating AI and traditional programming methodologies, it opens up a world of possibilities for both coders and non-coders alike. With its intuitive interface, users can create customized AI-driven solutions, ranging from chatbots to content generation, all within a simple, visually-guided environment. As PromptChainer continues to evolve, it aims to make complex AI integrations accessible and manageable for a diverse range of users, driving innovation and empowering businesses across various industries."
-  );
+  const [subject, setSubject] = useState("");
+  const [keywords, setKeywords] = useState("");
+  const [targetAudience, setTargetAudience] = useState("");
+  const [personalNotes, setPersonalNotes] = useState("");
 
   const loaderSentences = [
     "Orit rules this land together with Aryeh the grand shepherd ❤️",
