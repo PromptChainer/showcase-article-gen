@@ -381,12 +381,21 @@ export default function Home() {
         </div>
       </main>
       <a
+        href="https://github.com/PromptChainer/showcase-article-gen"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${styles.blogPostLink} ${styles.githubLink}`}
+      >
+        Repo on Github🍴
+      </a>
+      <a
         href="https://blog.promptchainer.io/p/use-case-custom-built-article-writer"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.blogPostLink}
       >
-        Wanna know how we activated this chain of prompts in a matter of minutes?
+        Wanna know how we activated this chain of prompts in a matter of
+        minutes?
       </a>
     </>
   );
