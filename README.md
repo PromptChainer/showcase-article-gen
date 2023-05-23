@@ -41,6 +41,10 @@ Copy the .env.example file and create a .env file in the root of the project. Ad
 ```bash
 NEXT_PUBLIC_API_KEY=your_api_key_here
 ```
+If you want to add Google Analytics, add your measurment ID the .env file:
+```bash
+NEXT_PUBLIC_GA_TRACKING_ID=your_google_analytics_measurment_id_here
+```
 Start the development server:
 ```bash
 npm run dev
