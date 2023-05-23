@@ -1,15 +1,18 @@
 .main {
   display: grid;
   grid-template-columns: 400px 1fr;
+  grid-template-areas:
+    "left right"
+    "bottom bottom";
   grid-gap: 15px;
   max-width: 1300px;
   margin: 0 auto;
   padding: 50px;
   min-height: 100vh;
-  padding-bottom: 100px;
 }
 
 .left {
+  grid-area: left;
   border-radius: 10px;
   background-color: #1e1f24;
   height: calc(100vh - 100px);
@@ -64,7 +67,7 @@
 
 .buttonHolder {
   padding: 15px;
-  padding-bottom: 60px;
+
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -87,6 +90,7 @@
 }
 
 .right {
+  grid-area: right;
   height: calc(100vh - 100px);
   border-radius: 10px;
   background-color: white;
@@ -171,13 +175,15 @@
 @media screen and (max-width: 768px) {
   .main {
     grid-template-columns: 1fr;
+    grid-template-areas: "left" "right" "bottom";
+    padding: 25px;
   }
 }
 
 @media screen and (max-height: 650px) {
   .main {
     grid-gap: 5px;
-    padding: unset;
+    padding: 10px;
   }
 
   .left,
@@ -238,18 +244,19 @@
 }
 
 .blogPostLink {
-  display: block;
   padding: 10px 0;
-  text-align: center;
-  color: #1d2134;
-  text-decoration: underline;
-  font-size: 16px;
-  position: fixed;
-  bottom: 0;
+  grid-area: bottom;
   width: 100%;
   background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
 }
 
 .githubLink {
-  bottom: 30px;
+  text-align: center;
+  color: #1d2134;
+  text-decoration: underline;
+  font-size: 14px;
 }
