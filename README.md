@@ -75,4 +75,4 @@ Distributed under the MIT License. See LICENSE for more information.
 
 ## 📫 Contact
 
-Email: supportPromptChainer@gmail.com
+Email: support@promptchainer.io
