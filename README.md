@@ -3,6 +3,9 @@
 ContentGen is a React application built using Next.js that uses [PromptChainer](https://promptchainer.io/)'s API to generate an article and more content based on user input. 
 This powerful tool is perfect for generating articles using AI and you can create it in a matter of minutes!
 
+Read more here:
+https://blog.promptchainer.io/p/use-case-custom-built-article-writer
+
 ## 🌟 Features
 
 - React.js & Next.js application.
