@@ -62,6 +62,7 @@
 
 .buttonHolder {
   padding: 15px;
+  padding-bottom: 60px;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -176,11 +177,13 @@
     grid-gap: 5px;
     padding: unset;
   }
+
   .left,
   .right {
     height: 100vh;
   }
 }
+
 .outputArea {
   position: relative;
 }
@@ -222,6 +225,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -231,3 +235,15 @@
   opacity: 1;
 }
 
+.blogPostLink {
+  display: block;
+  padding: 10px 0;
+  text-align: center;
+  color: #1d2134;
+  text-decoration: underline;
+  font-size: 16px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #ffffff;
+}
