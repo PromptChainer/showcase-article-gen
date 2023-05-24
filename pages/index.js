@@ -208,6 +208,31 @@ export default function Home() {
     );
   };
 
+  const renderFAQs = () => {
+    const faqs = apiResponse.filter((output) => output.name === "FAQs");
+  
+    if (!faqs || faqs.length === 0 || !faqs[0].output) return null;
+  
+    let isFirstQ = true;
+    const faqsFormatted = faqs[0].output.replace(/Q:/g, (match) => {
+      if (isFirstQ) {
+        isFirstQ = false;
+        return match;
+      } else {
+        return '<br /><br />' + match;
+      }
+    });
+  
+    return (
+      <>
+        <div className={styles.outputTitle}>{faqs[0].name}</div>
+        <div className={styles.outputContent} dangerouslySetInnerHTML={{ __html: faqsFormatted }}></div>
+      </>
+    );
+  };
+  
+   
+ 
   const renderOutputs = () => {
     if (apiResponse) {
       const outputs = apiResponse.filter((item) => item.type === "output");
@@ -235,7 +260,7 @@ export default function Home() {
           "Paragraph 2",
           "Paragraph 3",
           "Paragraph 4",
-          "Conclusion Paragraph",
+          "Paragraph Conclusion",
         ];
         return (
           <>
@@ -272,7 +297,8 @@ export default function Home() {
           !requiredSections.includes(output.name) &&
           !output.name.startsWith("Title") &&
           !output.name.startsWith("Paragraph") &&
-          !output.name.endsWith("Paragraph")
+          !output.name.endsWith("Paragraph") &&
+          output.name !== "FAQs"
       );
 
       return (
@@ -280,6 +306,7 @@ export default function Home() {
           {renderSection("Topics")}
           {renderSection("Opening")}
           {renderArticle()}
+          {renderFAQs()}
           {otherOutputs.map((output) => (
             <>
               <h2 className={styles.outputTitle}>{output.name}</h2>
