@@ -75,7 +75,7 @@ export default function Home() {
   };
 
   const calculateDisplayTime = (sentence) => {
-    // Each word displays for 300ms, then a 50ms wait between words, then a 2s wait after the sentence
+    // Each word displays for 350ms, then a 50ms wait between words, then a 2s wait after the sentence
     return sentence.split(" ").length * 400 + 2000;
   };
 
@@ -102,35 +102,65 @@ export default function Home() {
     if (!validateForm()) {
       return;
     }
-
+  
     setLoading(true);
+  
+    let url;
+    let body;
+  
+    if (!keywords && !personalNotes) {
+      url = "https://prod.api.promptchainer.io/api/flows/run/cli1spyxc002jzr0g5glyvhnb";
+      body = JSON.stringify({
+        variables: {
+          subject,
+          targetAudience,
+        },
+      });
+    } else if (!keywords) {
+      url = "https://prod.api.promptchainer.io/api/flows/run/cli1uw9gg0033zr0gjs4j356r";
+      body = JSON.stringify({
+        variables: {
+          subject,
+          targetAudience,
+          personalNotes,
+        },
+      });
+    } else if (!personalNotes) {
+      url = "https://prod.api.promptchainer.io/api/flows/run/cli1us51z002zzt0hkr8260dr";
+      body = JSON.stringify({
+        variables: {
+          subject,
+          targetAudience,
+          keywords,
+        },
+      });
+    } else {
+      url = "https://prod.api.promptchainer.io/api/flows/run/clhez045u0003s10gwx7xgr8o";
+      body = JSON.stringify({
+        variables: {
+          subject,
+          keywords,
+          targetAudience,
+          personalNotes,
+        },
+      });
+    }
+  
     try {
-      const response = await fetch(
-        "https://prod.api.promptchainer.io/api/flows/run/clhez045u0003s10gwx7xgr8o",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
-          },
-          body: JSON.stringify({
-            variables: {
-              subject,
-              keywords,
-              targetAudience,
-              personalNotes,
-            },
-          }),
-        }
-      );
-
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
+        },
+        body: body,
+      });
+  
       if (response.ok) {
         const data = await response.json();
         setApiResponse(data);
       } else {
-        throw new Error(
-          "Something went wrong with the promptchainer.io API call"
-        );
+        throw new Error("Something went wrong with the promptchainer.io API call");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -138,7 +168,7 @@ export default function Home() {
       setLoading(false);
     }
   };
-
+   
   const subjectChange = (e) => {
     setSubject(e.target.value);
   };
@@ -163,7 +193,7 @@ export default function Home() {
     const [displayTimeout, setDisplayTimeout] = useState(null);
 
     const calculateDisplayTime = (sentence) => {
-      // Each word displays for 300ms, then a 50ms wait between words, then a 2s wait after the sentence
+      // Each word displays for 350ms, then a 50ms wait between words, then a 2s wait after the sentence
       return sentence.split(" ").length * 400 + 2000;
     };
 
