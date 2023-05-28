@@ -382,7 +382,7 @@ export default function Home() {
               placeholder="Start typing, fear not!"
               value={keywords}
               onChange={keywordsChange}
-              label="Keywords"
+              label="(optional) Keywords"
               isKeywords={true}
               description="Seperate keywords by commas."
             />
@@ -398,7 +398,7 @@ export default function Home() {
               placeholder="Start typing, fear not!"
               value={personalNotes}
               onChange={personalNotesChange}
-              label="Personal Notes"
+              label="(optional) Personal Notes"
               description="Any personal notes or additional instructions."
               rows={2}
             />
