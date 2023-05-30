@@ -398,7 +398,7 @@ export default function Home() {
               placeholder="Start typing, fear not!"
               value={personalNotes}
               onChange={personalNotesChange}
-              label="(optional) Personal Notes"
+              label="(optional)Personal Notes"
               description="Any personal notes or additional instructions."
               rows={2}
             />
