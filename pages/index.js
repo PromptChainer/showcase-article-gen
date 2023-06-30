@@ -109,7 +109,7 @@ export default function Home() {
     let body;
   
     if (!keywords && !personalNotes) {
-      url = "https://prod.api.promptchainer.io/api/flows/run/cli1spyxc002jzr0g5glyvhnb";
+      url = "https://api.promptchainer.io/api/flows/run/cli1spyxc002jzr0g5glyvhnb";
       body = JSON.stringify({
         variables: {
           subject,
@@ -117,7 +117,7 @@ export default function Home() {
         },
       });
     } else if (!keywords) {
-      url = "https://prod.api.promptchainer.io/api/flows/run/cli1uw9gg0033zr0gjs4j356r";
+      url = "https://api.promptchainer.io/api/flows/run/cli1uw9gg0033zr0gjs4j356r";
       body = JSON.stringify({
         variables: {
           subject,
@@ -126,7 +126,7 @@ export default function Home() {
         },
       });
     } else if (!personalNotes) {
-      url = "https://prod.api.promptchainer.io/api/flows/run/cli1us51z002zzt0hkr8260dr";
+      url = "https://api.promptchainer.io/api/flows/run/cli1us51z002zzt0hkr8260dr";
       body = JSON.stringify({
         variables: {
           subject,
@@ -135,7 +135,7 @@ export default function Home() {
         },
       });
     } else {
-      url = "https://prod.api.promptchainer.io/api/flows/run/clhez045u0003s10gwx7xgr8o";
+      url = "https://api.promptchainer.io/api/flows/run/clhez045u0003s10gwx7xgr8o";
       body = JSON.stringify({
         variables: {
           subject,
